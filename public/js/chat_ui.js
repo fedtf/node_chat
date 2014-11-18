@@ -21,7 +21,7 @@ function processUserInput(chatApp, socket) {
         $('#messages').scrollTop($('#messages').prop('scrollHeight'));
     }
 
-    $('#send-message').val();
+    $('#send-message').val('');
 }
 
 var socket = io.connect();
@@ -31,13 +31,13 @@ $(function() {
 
     socket.on('nameResult', function (result) {
         var message;
-
         if (result.success) {
             message = 'You are known as ' + result.name + '.';
         } else {
             message = result.message;
         }
-        $('#message').append(divSystemContentElement(message));
+        console.log(message);
+        $('#messages').append(divSystemContentElement(message));
     });
 
     socket.on('joinResult', function(result) {
@@ -61,7 +61,8 @@ $(function() {
         }
 
         $('#room-list div').click(function () {
-            chatApp.processCommand('/join' + $(this).text());
+            chatApp.processCommand('/join ' + $(this).text());
+            console.log($(this).text());
             $('#send-message').focus();
         });
     });

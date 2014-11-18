@@ -14,6 +14,7 @@ Chat.prototype.changeRoom = function(room) {
     this.socket.emit('join', {
         newRoom:room
     });
+    console.log(room);
 };
 
 Chat.prototype.processCommand = function(command) {
@@ -25,6 +26,7 @@ Chat.prototype.processCommand = function(command) {
             words.shift();
             var room = words.join(' ');
             this.changeRoom(room);
+            console.log('room changed');
             break;
         case 'nick':
             words.shift();
